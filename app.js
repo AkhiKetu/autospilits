@@ -30,9 +30,14 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/", require("./routes/auth"));
 
 // Protected Dashboard
-app.get("/dashboard", (req, res) => {
+const User = require("./models/user");
+
+app.get("/dashboard", async (req, res) => {
     if (!req.session.userId) return res.redirect("/login");
-    res.render("dashboard");
+
+    const user = await User.findById(req.session.userId);
+
+    res.render("dashboard", { user });
 });
 
 // Start Server

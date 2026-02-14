@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
 
 // Login Page
 router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login", { error: null });
 });
 
 // Login Logic
@@ -37,10 +37,16 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.send("User not found");
+
+    if (!user) {
+        return res.render("login", { error: "User not found" });
+    }
 
     const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) return res.send("Wrong password");
+
+    if (!validPassword) {
+        return res.render("login", { error: "Wrong password" });
+    }
 
     req.session.userId = user._id;
     res.redirect("/dashboard");
