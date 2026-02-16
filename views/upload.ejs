@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Bill | AutoSplits</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f6fb;
+        }
+
+        .upload-container {
+            max-width: 850px;
+            margin: 60px auto;
+        }
+
+        .step-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-weight: 600;
+        }
+
+        .step-circle.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .upload-box {
+            border: 2px dashed #3b82f6;
+            border-radius: 18px;
+            padding: 70px 40px;
+            text-align: center;
+            background: #f8fbff;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-box:hover {
+            background: #eef5ff;
+        }
+
+        .upload-icon {
+            font-size: 50px;
+            background: #dbeafe;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            color: #2563eb;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-name {
+            margin-top: 15px;
+            font-weight: 500;
+            color: #2563eb;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: #6b7280;
+        }
+
+        .tip-box {
+            background: #eaf2ff;
+            border-radius: 12px;
+            padding: 15px;
+            color: #2563eb;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container upload-container">
+
+    <!-- Title -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Upload Your Bill</h2>
+        <p class="text-muted">
+            Take a photo or upload an image of your receipt. Our AI will extract all items automatically.
+        </p>
+    </div>
+
+    <!-- Step Navigation -->
+    <div class="row text-center mb-5">
+        <div class="col">
+            <div class="step-circle active">1</div>
+            <small>Upload</small>
+        </div>
+        <div class="col">
+            <div class="step-circle">2</div>
+            <small>Extract</small>
+        </div>
+        <div class="col">
+            <div class="step-circle">3</div>
+            <small>Members</small>
+        </div>
+        <div class="col">
+            <div class="step-circle">4</div>
+            <small>Assign</small>
+        </div>
+        <div class="col">
+            <div class="step-circle">5</div>
+            <small>Settle</small>
+        </div>
+    </div>
+
+    <!-- Upload Form -->
+    <form action="#" method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box" onclick="document.getElementById('fileInput').click();">
+
+            <!-- KEEPING SAME ICON STYLE -->
+            <div class="upload-icon">
+                <i class="bi bi-upload"></i>
+            </div>
+
+            <h5 class="fw-semibold">Drag and drop your bill</h5>
+            <p class="text-muted">or click to browse</p>
+
+            <button type="button" class="btn btn-primary px-4 mb-3">
+                Select File
+            </button>
+
+            <input type="file" id="fileInput" name="bill" onchange="showFileName(this)">
+
+            <!-- File name display -->
+            <div id="fileName" class="file-name"></div>
+
+        </div>
+
+        <div class="divider">OR</div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-secondary w-100">
+                Try Demo with Sample Bill
+            </button>
+        </div>
+
+        <div class="tip-box mt-4">
+            💡 Tip: Our AI extracts items, quantities, and prices from your bill image.
+            You can edit them in the next step if needed.
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    function showFileName(input) {
+        const fileNameDisplay = document.getElementById("fileName");
+
+        if (input.files.length > 0) {
+            fileNameDisplay.innerHTML =
+                '<i class="bi bi-file-earmark-text me-2"></i>' +
+                input.files[0].name;
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -22,6 +22,12 @@ app.use(session({
     saveUninitialized: false
 }));
 
+//Stat spiliting
+app.get("/upload", (req, res) => {
+    if (!req.session.userId) return res.redirect("/login");
+    res.render("upload");
+});
+
 // View Engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
